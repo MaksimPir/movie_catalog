@@ -1,0 +1,10 @@
+@import '../../../shared/styles/theme/colors.scss';
+.navbar{
+    width: 100%;
+    height: 10%;
+    background-color: $dark-theme-color;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+}

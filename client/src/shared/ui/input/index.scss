@@ -1,0 +1,12 @@
+@import '../../styles/theme/colors.scss';
+.input
+{
+    border: none;
+    background-color: $dark-theme-second;
+    margin: 0px 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 5px;
+    color: white;
+    width: 100%;
+}

@@ -1,0 +1,21 @@
+@import '../../styles/index.scss';
+.button{
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px 18px;
+    margin: 5px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: $dark-theme-fourth;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+  
+    &:hover {
+      background-color: $dark-theme-second;
+    }
+}

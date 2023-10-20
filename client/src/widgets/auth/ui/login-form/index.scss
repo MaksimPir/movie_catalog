@@ -1,0 +1,24 @@
+@import 'shared/styles/index.scss';
+.loginform
+{
+    border: 1px solid black;
+    box-shadow: 1px 1px;
+    background-color: $dark-theme-third;
+    border-radius: 10px;
+    padding: 10px;
+    &__main
+    {
+        width: 510px;
+        >div{
+            display: grid;
+            grid-template-columns: 2fr 7fr;
+            margin: 5px 10px;
+        }
+    }
+    &__footer 
+    {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    @include center-both
+}
