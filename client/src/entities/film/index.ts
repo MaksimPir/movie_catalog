@@ -1,0 +1,1 @@
+export * as filmModel from './model'

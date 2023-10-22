@@ -2,7 +2,6 @@ const bcrypt=require('bcrypt')
 const db=require('../../db')
 const ApiError=require('../../exceptions/api-error')
 const uuid=require('uuid')
-const mailService=require('./mail.service')
 const tokenService=require('../service/token.service')
 const UserDto=require('../dto/user.dto')
 class UserService{

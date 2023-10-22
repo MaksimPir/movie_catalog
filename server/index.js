@@ -2,6 +2,7 @@ const express= require('express')
 const cors=require('cors')
 const cookieParser=require('cookie-parser')
 const userRouter=require('./routes/user.routes')
+const filmRouter=require('./routes/film.routes')
 const errorMiddleware=require('./middlewares/error-middleware')
 require('dotenv').config()
 
@@ -13,6 +14,7 @@ app.use(cors({
     origin:process.env.URL_CLIENT
 }))
 app.use('/api', userRouter)
+app.use('/api', filmRouter)
 app.use(errorMiddleware)
 const PORT=process.env.PORT ||5000
 const start= async ()=>{
