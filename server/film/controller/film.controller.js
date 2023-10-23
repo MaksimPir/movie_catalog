@@ -18,7 +18,7 @@ class FilmController{
         {
             const {idFilm}=req.params
             const film=await filmService.getFilmById(idFilm)
-            return res.json(film)
+            return res.json({film:film})
         }
         catch(e)
         {

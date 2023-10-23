@@ -22,10 +22,6 @@ const LoginForm:FC = () => {
         }
         
     },[])
-    useEffect(()=>{
-        console.log(email,'EMAIL');
-        
-    },[email])
     const dispatch=useAppDispatch()
     const loginHandler=()=>{
        login(dispatch,email, password)

@@ -33,9 +33,6 @@
         word-wrap: break-word; 
     }
     &__desc{
-        // overflow: hidden;
-        // text-overflow: ellipsis; 
-        // white-space: nowrap; /* Текст не переносится */
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;

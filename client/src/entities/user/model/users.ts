@@ -46,7 +46,6 @@ export const login =async(dispatch:AppDispatch,email:string,password:string)=>{
             dispatch(fetching())
             const response=await UserService.login(email,password)
             dispatch(fetchingStop({isError:false,isFetching:false,isSuccess:true,answer:'Произведен успешный вход'}))
-            console.log('login',response);
             localStorage.setItem('token',response.data.accessToken)
             dispatch(auth(response.data.user))
         }
@@ -63,7 +62,6 @@ export const registration =async(dispatch:AppDispatch,email:string,password:stri
         dispatch(fetching())
         const response=await UserService.registration(email,password)
         dispatch(fetchingStop({isError:false,isFetching:false,isSuccess:true,answer:'Произведена успешная регистрация и вход'}))
-        console.log('reg',response);
         localStorage.setItem('token',response.data.accessToken)
         dispatch(auth(response.data.user))
     }
@@ -81,7 +79,7 @@ export const logoutAction =async(dispatch:AppDispatch)=>{
         const response=await UserService.logout()
         localStorage.removeItem('token')
         dispatch(logout())
-        dispatch(fetchingStop({isError:false,isFetching:false,isSuccess:true,answer:'Успешный выход'}))
+        dispatch(fetchingStop({isError:false,isFetching:false,isSuccess:true,answer:''}))
     }
     catch(e:any)
     {
@@ -93,7 +91,6 @@ export const checkAuth=async(dispatch:AppDispatch)=>{
     const {auth}=authSlice.actions
     try{
         const response=await axios.get<AuthResponse>(`${API_URL}/refresh`,{withCredentials:true})
-        console.log(response);
         localStorage.setItem('token',response.data.accessToken)
         dispatch(auth(response.data.user))
     }

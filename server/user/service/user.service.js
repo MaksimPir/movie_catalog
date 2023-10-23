@@ -8,7 +8,6 @@ class UserService{
     async isRegistered(email)
     {
         const candidate=await db.query(`SELECT * FROM users WHERE email='${email}'`)
-        console.log(candidate);
         if(candidate.rowCount==0) return false
         return candidate.rows[0]
     }

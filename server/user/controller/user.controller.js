@@ -34,7 +34,7 @@ class UserController{
         }
         catch(e)
         {
-            console.log('Error login1',e);
+            console.log('Error login',e);
             next(e)
         }
        

@@ -1,6 +1,7 @@
 import LoginPage from "../pages/LoginPage/LoginPage"
 import MainPage from "../pages/MainPage/MainPage"
 import UserPage from "../pages/UserPage/UserPage"
+import FilmPage from "./FilmPage/FilmPage"
 
 
 interface IRoute{
@@ -10,7 +11,8 @@ interface IRoute{
 export enum routesEnum{
     LOGIN='/login',
     MAIN='/main',
-    USER='/user'
+    USER='/user',
+    FILM='/film/:idFilm'
 } 
 export const publicRoutes:IRoute[]=[
     {
@@ -20,7 +22,11 @@ export const publicRoutes:IRoute[]=[
     {
         path:routesEnum.MAIN,
         component:MainPage
-    }
+    },
+    {
+        path:routesEnum.FILM,
+        component:FilmPage
+    },
 ]
 
 export const authRoutes:IRoute[]=[

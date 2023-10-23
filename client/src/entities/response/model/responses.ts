@@ -26,8 +26,6 @@ export const responseSlice=createSlice(
                 state.isFetching=false
             },
             fetchingClear:(state)=>{
-                console.log('VASAS');
-                
                 state.answer=''
                 state.isError=false
                 state.isSuccess=false

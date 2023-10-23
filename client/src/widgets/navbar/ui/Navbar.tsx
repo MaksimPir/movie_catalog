@@ -14,17 +14,15 @@ import React, { FC } from "react";
         userModel.logoutAction(dispatch)
     }
     return (
-        isAuth
-        ?
+        
         <div className="navbar">
             <div className="navbar__item">
-                <Button  onClick={logoutHandler} text="Выйти" nameOfClass="button__exit"></Button>
+                <Button  onClick={()=>navigate(routesEnum.MAIN)} text="Главная" nameOfClass="button__exit"></Button>
             </div>
-        </div>
-        :
-        <div className="navbar">
-            <div  className="navbar__item">
-                <Button  onClick={()=>navigate(routesEnum.LOGIN)} text="Войти" nameOfClass="button__login"></Button>
+            <div className="navbar__item">
+                {isAuth?<Button  onClick={logoutHandler} text="Выйти" nameOfClass="button__exit"></Button>:
+                 <Button  onClick={()=>navigate(routesEnum.LOGIN)} text="Войти" nameOfClass="button__login"></Button>
+                }
             </div>
         </div>
     );

@@ -2,6 +2,7 @@ import 'shared/styles/globals.scss';
 import AppRouter from 'pages';
 import { withProviders } from './providers';
 import {Navbar} from 'widgets/navbar';
+import { Footer } from 'widgets/footer';
 
 const App=()=> {
 
@@ -9,6 +10,7 @@ const App=()=> {
     <>
       <Navbar/>
       <AppRouter/>
+      <Footer/>
     </>
    
   );
