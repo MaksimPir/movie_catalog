@@ -51,8 +51,17 @@ export const login =async(dispatch:AppDispatch,email:string,password:string)=>{
         }
         catch(e:any)
         {
-            dispatch(fetchingStop({isError:true,isFetching:false,isSuccess:false,answer:e.response.data.message}))
-            console.log(e.response?.data?.message);
+            if(e.response)
+            {
+                dispatch(fetchingStop({isError:true,isFetching:false,isSuccess:false,answer:e.response.data.message}))
+                console.log(e.response?.data?.message);
+            }
+            else 
+            {
+                dispatch(fetchingStop({isError:true,isFetching:false,isSuccess:false,answer:e.message}))
+                console.log(e);
+            }
+            
         }
     }
 export const registration =async(dispatch:AppDispatch,email:string,password:string)=>{
@@ -67,8 +76,16 @@ export const registration =async(dispatch:AppDispatch,email:string,password:stri
     }
     catch(e:any)
     {
-        dispatch(fetchingStop({isError:true,isFetching:false,isSuccess:false,answer:e.response.data.message}))
-        console.log(e.response?.data?.message);
+        if(e.response)
+        {
+            dispatch(fetchingStop({isError:true,isFetching:false,isSuccess:false,answer:e.response.data.message}))
+            console.log(e.response?.data?.message);
+        }
+        else 
+        {
+            dispatch(fetchingStop({isError:true,isFetching:false,isSuccess:false,answer:e.message}))
+            console.log(e);
+        }
     }
 }
 export const logoutAction =async(dispatch:AppDispatch)=>{

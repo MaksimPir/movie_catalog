@@ -4,11 +4,15 @@ import {FilmCard, fetchFilms } from '../../../entities/film/model';
 import './style.scss'
 
 export const Catalog = () => {
-    const {films}=useAppSelector(state=>state.film)
+    const {films,error}=useAppSelector(state=>state.film)
     const dispatch=useAppDispatch()
     useEffect(()=>{
         fetchFilms(dispatch)
     },[])
+    useEffect(()=>{
+        console.log(error,'er');
+        
+    })
     return (
         <div className='catalog'>
             {films&& films.map((el)=>{
@@ -16,6 +20,7 @@ export const Catalog = () => {
                     <FilmCard key={el.id} film={el}/>
                 )
             })}
+            {error&&<div>Что-то пошло не так</div>}
         </div>
     );
 };

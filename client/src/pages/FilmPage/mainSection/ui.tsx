@@ -10,9 +10,11 @@ export const MainSectionFilm:FC<IMainSectionProps> = ({film}) => {
             </div>
           
             <div className='filmsection__infofilm'>
-                <h1 className='infofilm__title'>
-                    {film.name}
-                </h1>
+                <div className='infofilm__title'>
+                    <h1>
+                        {film.name}
+                    </h1>
+                </div>
                 <div className='infofilm__rate'>
                     РЕЙТИНГ {film.rate}
                 </div>

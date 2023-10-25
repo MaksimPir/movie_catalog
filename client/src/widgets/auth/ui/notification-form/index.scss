@@ -1,13 +1,15 @@
 @import 'shared/styles/';
 .notice
 {
-    position: absolute;
+    position: fixed;
     width: 180px;
     text-align: center;
     background-color: $dark-theme-third;
-    transform: translate(80vw, 5vh);
     padding: 10px;
     border-radius: 20px;
+    border: 1px solid black;
+    z-index: 99;
+    margin: 10px;
     &__btn
     {
         display: flex;

@@ -12,6 +12,10 @@ interface INoticeFormProps{
     type:TypesNotices
 }
 export const NotificationForm:FC<INoticeFormProps>=({text,type})=>{
+    useEffect(()=>{
+        console.log('Renerd');
+        
+    })
     const dispatch=useAppDispatch()
     useEffect(()=>{
         const timer=setTimeout(()=>{
