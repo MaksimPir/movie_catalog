@@ -25,6 +25,10 @@
 @mixin heading3 {
   font-size: 26px;
   font-weight: $fw-bold;
+  @include mobile
+  {
+      font-size: 16px;
+  }
 }
 
 @mixin heading5 {

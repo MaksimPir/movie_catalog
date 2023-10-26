@@ -37,3 +37,8 @@ input:focus, textarea:focus
 h1{
     @include heading1;
 }
+#root
+{
+    height: 100vh;
+    position: relative;
+}

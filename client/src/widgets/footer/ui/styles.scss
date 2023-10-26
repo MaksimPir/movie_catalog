@@ -1,3 +1,4 @@
+@import 'shared/styles/index.scss';
 .footer
 {
     width: 100%;
@@ -8,4 +9,17 @@
     justify-content: space-around;
     font-size: 13px;
     position: absolute;
+    padding: 4px;
+    bottom: 0;
+    div:first-child
+    {
+        margin-right: 5px;
+    }
+    @include mobile {
+        font-size: 9px;
+    }
+    @include middle
+    {
+        font-size: 10px;
+    }
 }

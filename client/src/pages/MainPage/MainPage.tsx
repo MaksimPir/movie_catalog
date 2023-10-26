@@ -10,9 +10,12 @@ const MainPage = () => {
 
     return (
         <>
+        <div>
             <h1>
-                Main Page
+                {'PseudoTube'}
             </h1>
+        </div>
+           
             <div>
                 {user.email}
             </div>
