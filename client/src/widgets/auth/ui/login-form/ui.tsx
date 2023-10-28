@@ -1,13 +1,15 @@
 import { FC, useEffect, useRef, useState } from "react";
-import { useAppDispatch } from "shared/lib";
 import { login, registration } from "entities/user";
 import {Button} from 'shared/ui/button'
 import  './style.scss'
 import { InputWithRules } from "features/inputWithRules";
+import { IAuthPayload } from "entities/user/model/types";
+import { useAppDispatch } from "shared/lib";
 
 export const LoginForm:FC = () => {
     const [email, setEmail]=useState('')
     const [password, setPassword]=useState('')
+    const dispatch=useAppDispatch()
     const myRef=useRef<HTMLInputElement>(null)
     useEffect(()=>{
         const timer=setTimeout(()=>{
@@ -21,12 +23,11 @@ export const LoginForm:FC = () => {
         }
         
     },[])
-    const dispatch=useAppDispatch()
     const loginHandler=()=>{
-       login(dispatch,email, password)
+       dispatch(login({email,password} as IAuthPayload))
     }
     const registrationHandler=()=>{
-        registration(dispatch,email,password)
+        dispatch(registration({email,password} as IAuthPayload))
     }
     return (
         <div className="loginformContainer">

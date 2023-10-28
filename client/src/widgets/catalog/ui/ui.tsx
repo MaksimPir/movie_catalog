@@ -7,7 +7,7 @@ export const Catalog = () => {
     const {films,error}=useAppSelector(state=>state.film)
     const dispatch=useAppDispatch()
     useEffect(()=>{
-        fetchFilms(dispatch)
+        dispatch(fetchFilms())
     },[])
     return (
         <div className='catalog'>

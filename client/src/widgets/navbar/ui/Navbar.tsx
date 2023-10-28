@@ -8,11 +8,11 @@ import  { FC, useState } from "react";
 
  const Navbar:FC = () => {
     const {isAuth}=useAppSelector(state=>state.auth)
-    const [isMenuOpen, setIsMenuOpen]=useState(false)
     const dispatch=useAppDispatch()
+    const [isMenuOpen, setIsMenuOpen]=useState(false)
     const navigate=useNavigate()
     const logoutHandler=()=>{
-        logoutAction(dispatch)
+        dispatch(logoutAction())
     }
 
     return (

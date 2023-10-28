@@ -5,9 +5,9 @@ import { publicRoutes, routesEnum } from './types';
 import { checkAuth } from 'entities/user';
 
 const AppRouter:FC = () => {
-    const dispatch=useAppDispatch()
+  const dispatch=useAppDispatch()
     useEffect(()=>{
-      if(localStorage.getItem('token')) checkAuth(dispatch)
+      if(localStorage.getItem('token')) dispatch(checkAuth())
     },[])
     const {isAuth}=useAppSelector(state=>state.auth)
    return( 

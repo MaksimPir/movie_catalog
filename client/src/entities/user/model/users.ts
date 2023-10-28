@@ -1,11 +1,9 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IAuthPayload, IInitialState } from "./types";
-import {AppDispatch} from "shared/lib/types";
 import UserService from "shared/api/typicode/users";
 import { AuthResponse } from "shared/api";
 import { API_URL } from "shared/config";
 import axios from "axios";
-import { responseSlice } from "entities/response";
 
 const initialState:IInitialState={
     user:
@@ -33,6 +31,35 @@ export const authSlice=createSlice(
                     password:null
                 }
             }
+        },
+        extraReducers:(builder)=>{
+            builder.addCase(registration.fulfilled,(state,action)=>{
+                if(action.payload)
+                {
+                    state.isAuth=true
+                    state.user=action.payload
+                }
+            })
+            builder.addCase(login.fulfilled,(state,action)=>{
+                if(action.payload)
+                {
+                    state.isAuth=true
+                    state.user=action.payload
+                }
+            })
+            builder.addCase(logoutAction.fulfilled,(state,action)=>{
+                state.isAuth=false
+                state.user.email=null
+                state.user.id=null
+                state.user.password=null
+            })
+            builder.addCase(checkAuth.fulfilled,(state,action)=>{
+                if(action.payload)
+                {
+                    state.isAuth=true
+                    state.user=action.payload
+                }
+            })
         }
     }
 )
@@ -40,79 +67,61 @@ export const {auth,logout}=authSlice.actions
 export const reducer= authSlice.reducer
 
 
-export const login =async(dispatch:AppDispatch,email:string,password:string)=>{
-        const {auth}=authSlice.actions
-        const {fetching,fetchingStop}=responseSlice.actions
-        try{
-            dispatch(fetching())
-            const response=await UserService.login(email,password)
-            dispatch(fetchingStop({isError:false,isFetching:false,isSuccess:true,answer:'Произведен успешный вход'}))
-            localStorage.setItem('token',response.data.accessToken)
-            dispatch(auth(response.data.user))
-        }
-        catch(e:any)
-        {
-            if(e.response)
-            {
-                dispatch(fetchingStop({isError:true,isFetching:false,isSuccess:false,answer:e.response.data.message}))
-                console.log(e.response?.data?.message);
-            }
-            else 
-            {
-                dispatch(fetchingStop({isError:true,isFetching:false,isSuccess:false,answer:e.message}))
-                console.log(e);
-            }
-            
-        }
-    }
-export const registration =async(dispatch:AppDispatch,email:string,password:string)=>{
-    const {auth}=authSlice.actions
-    const {fetching,fetchingStop}=responseSlice.actions
+export const login =createAsyncThunk('user/login',async(data:IAuthPayload)=>{
     try{
-        dispatch(fetching())
-        const response=await UserService.registration(email,password)
-        dispatch(fetchingStop({isError:false,isFetching:false,isSuccess:true,answer:'Произведена успешная регистрация и вход'}))
+        const response=await UserService.login(data.email,data.password)
         localStorage.setItem('token',response.data.accessToken)
-        dispatch(auth(response.data.user))
+        return response.data.user
     }
     catch(e:any)
     {
         if(e.response)
         {
-            dispatch(fetchingStop({isError:true,isFetching:false,isSuccess:false,answer:e.response.data.message}))
             console.log(e.response?.data?.message);
         }
         else 
         {
-            dispatch(fetchingStop({isError:true,isFetching:false,isSuccess:false,answer:e.message}))
             console.log(e);
         }
+        
     }
-}
-export const logoutAction =async(dispatch:AppDispatch)=>{
-    const {fetching,fetchingStop}=responseSlice.actions
+})   
+export const registration =createAsyncThunk('user/registration',async(data:IAuthPayload)=>{
     try{
-        dispatch(fetching())
-        const response=await UserService.logout()
-        localStorage.removeItem('token')
-        dispatch(logout())
-        dispatch(fetchingStop({isError:false,isFetching:false,isSuccess:true,answer:''}))
+        const response=await UserService.registration(data.email,data.password)
+        localStorage.setItem('token',response.data.accessToken)
+        return response.data.user
     }
     catch(e:any)
     {
-        dispatch(fetchingStop({isError:true,isFetching:false,isSuccess:false,answer:e.response.data.message}))
+        if(e.response)
+        {
+            console.log(e.response?.data?.message);
+        }
+        else 
+        {
+            console.log(e);
+        }
+    }
+})
+export const logoutAction =createAsyncThunk('user/logout',async()=>{
+    try{
+        const response=await UserService.logout()
+        localStorage.removeItem('token')
+    }
+    catch(e:any)
+    {
         console.log(e.response?.data?.message);
     }
-}
-export const checkAuth=async(dispatch:AppDispatch)=>{
-    const {auth}=authSlice.actions
+}) 
+export const checkAuth=createAsyncThunk('user/checkAuth',async()=>{
     try{
         const response=await axios.get<AuthResponse>(`${API_URL}/refresh`,{withCredentials:true})
         localStorage.setItem('token',response.data.accessToken)
-        dispatch(auth(response.data.user))
+        return response.data.user
     }
     catch(e)
     {
         console.log(e);
     }
-}
+})

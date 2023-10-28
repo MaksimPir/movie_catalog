@@ -5,7 +5,8 @@ export interface IInitialState{
     isAuth:boolean
 }
 export interface IAuthPayload{
-    id:number|null
-    email:string|null
-    password:string|null
+    id:number
+    email:string
+    password:string
 }
+
