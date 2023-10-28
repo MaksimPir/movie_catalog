@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IAuthPayload, IInitialState } from "./types";
-import {AppDispatch} from "app/store/types";
+import {AppDispatch} from "shared/lib/types";
 import UserService from "shared/api/typicode/users";
 import { AuthResponse } from "shared/api";
 import { API_URL } from "shared/config";
@@ -8,7 +8,8 @@ import axios from "axios";
 import { responseSlice } from "entities/response";
 
 const initialState:IInitialState={
-    user:{
+    user:
+    {
         id:null,
         email:null,
         password:null
@@ -89,7 +90,6 @@ export const registration =async(dispatch:AppDispatch,email:string,password:stri
     }
 }
 export const logoutAction =async(dispatch:AppDispatch)=>{
-    const {auth}=authSlice.actions
     const {fetching,fetchingStop}=responseSlice.actions
     try{
         dispatch(fetching())

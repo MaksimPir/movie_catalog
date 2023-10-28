@@ -47,7 +47,7 @@
             {
                 position: fixed;
                 left: -100%;
-                top:52px;
+                top:8%;
                 gap: 0;
                 flex-direction: column;
                 background-color: rgb(26, 26, 26);
@@ -82,7 +82,4 @@
     -webkit-transition: all .3s ease-in-out;
     background-color: white;
  
-}
-@media(max-width:768px) {
-    
 }

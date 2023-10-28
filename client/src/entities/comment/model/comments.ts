@@ -1,9 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { AppDispatch } from "app/store/types";
+import { AppDispatch } from "shared/lib/types";
 import { responseSlice } from "entities/response";
 import { IComment } from "shared/api";
 import CommentService from "shared/api/typicode/comments";
-import FilmService from "shared/api/typicode/films";
 
 const initialState:{comments:IComment[]}={
     comments:[] as IComment[]
@@ -16,16 +15,15 @@ export const commentSlice=createSlice({
             state.comments=action.payload
         }
     }
-
 })
-export const {setComments}=commentSlice.actions
+
 export const fetchCommentsById =async(dispatch:AppDispatch, filmId:number)=>{
     const {fetching,fetchingStop}=responseSlice.actions
     const {setComments}=commentSlice.actions
     try{
         dispatch(fetching())
         const response=await CommentService.getById(filmId)
-        dispatch(fetchingStop({isError:false,isFetching:false,isSuccess:true,answer:'Произведен успешный поиск фильма'}))
+        dispatch(fetchingStop({isError:false,isFetching:false,isSuccess:true,answer:''}))
         dispatch(setComments(response.data.comments))
     }
     catch(e:any)
@@ -40,8 +38,8 @@ export const addComment=async(dispatch:AppDispatch, filmId:number, text:string, 
     try{
         dispatch(fetching())
         const response=await CommentService.addComment(filmId, userId,text)
-        dispatch(fetchingStop({isError:false,isFetching:false,isSuccess:true,answer:'Комментарий успешно добавлен'}))
-        fetchCommentsById(dispatch,filmId)
+        dispatch(fetchingStop({isError:false,isFetching:false,isSuccess:true,answer: response.data.message}))
+        await fetchCommentsById(dispatch,filmId)
     }
     catch(e:any)
     {

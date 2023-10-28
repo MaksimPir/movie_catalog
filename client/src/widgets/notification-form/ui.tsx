@@ -1,21 +1,10 @@
-import React,{FC, useEffect, useState} from 'react'
+import {FC, useEffect} from 'react'
 import './index.scss'
-import { useAppDispatch, useAppSelector } from 'shared/lib'
-import { clearResponse, responseSlice } from 'entities/response'
-export const enum TypesNotices{
-    Success='Успешно!',
-    Error='Ошибка',
-    Info='Информация'
-}
-interface INoticeFormProps{
-    text:string
-    type:TypesNotices
-}
+import { useAppDispatch } from 'shared/lib'
+import { clearResponse } from 'entities/response'
+import { INoticeFormProps, TypesNotices } from './types'
+
 export const NotificationForm:FC<INoticeFormProps>=({text,type})=>{
-    useEffect(()=>{
-        console.log('Renerd');
-        
-    })
     const dispatch=useAppDispatch()
     useEffect(()=>{
         const timer=setTimeout(()=>{
@@ -24,7 +13,7 @@ export const NotificationForm:FC<INoticeFormProps>=({text,type})=>{
         return ()=>{
             clearTimeout(timer)
         }
-    })
+    },[text,type])
     const click=()=>{
         clearResponse(dispatch)
     }
@@ -37,18 +26,18 @@ export const NotificationForm:FC<INoticeFormProps>=({text,type})=>{
         <div className={`notice ${nameClass}`} style={{display:'block'}}>
             <div className='notice__btn'> 
                 <button 
-                onClick={click}
+                    onClick={click}
                 >
                     X
                 </button>
             </div>
             <div className='notice__text'>
-                <div className={`text__${nameClass}`}>
+                <p className={`text__${nameClass}`}>
                     {type}
-                </div>
-                <div className='text__information'>
+                </p>
+                <p className='text__information'>
                     {text}
-                </div>
+                </p>
             </div>
         </div>
     )

@@ -1,1 +1,1 @@
-export * as filmModel from './model'
+export *  from './model'

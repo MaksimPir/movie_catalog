@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import {  ICommentResponse, IFilm, IResponseFilmById } from "./models";
+import {  ICommentResponse} from "./models";
 import { API_URL } from "shared/config";
 
 export default  class CommentService
@@ -8,8 +8,8 @@ export default  class CommentService
     {
         return axios.get<ICommentResponse>(`${API_URL}/comment/${id}`)
     }
-    static async addComment(idFilm:number, idUser:number, text:string)
+    static async addComment(idFilm:number, idUser:number, text:string): Promise<AxiosResponse<any, any>>
     {
-        axios.post(`${API_URL}/comment`,{idFilm, idUser,text})
+        return axios.post(`${API_URL}/comment`,{idFilm, idUser,text})
     }
 }

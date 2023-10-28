@@ -1,14 +1,8 @@
-import React, { FC, InputHTMLAttributes } from 'react';
+import  { FC } from 'react';
 import './index.scss'
+import { IInputProps } from './types';
 
-interface IInputProps extends Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  "onChange" | "value"
->  {
-  value: string;
-  onChange: (value: string) => void;
-  inputRef?:React.LegacyRef<HTMLInputElement>
-};
+
 export const Input:FC<IInputProps> = (props) => {
     const {onChange,value,className,inputRef,...other}=props
     return (

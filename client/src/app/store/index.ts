@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { userModel } from "entities/user/";
-import { filmModel } from "entities/film/";
+import { authSlice } from "entities/user/";
+import { filmSlice } from "entities/film/";
 import {responseSlice} from 'entities/response/'
 import {commentSlice} from 'entities/comment'
 
@@ -8,9 +8,9 @@ import {commentSlice} from 'entities/comment'
 export const store=configureStore(
     {
         reducer:{
-            auth:userModel.authSlice.reducer,
+            auth:authSlice.reducer,
             response:responseSlice.reducer,
-            film:filmModel.reducer,
+            film:filmSlice.reducer,
             comment:commentSlice.reducer
         }
     }

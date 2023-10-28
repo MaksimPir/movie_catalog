@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { useAppSelector,useAppDispatch } from '../../../shared/lib';
-import {FilmCard, fetchFilms } from '../../../entities/film/model';
+import  { useEffect } from 'react';
+import { useAppSelector,useAppDispatch } from 'shared/lib';
+import {FilmCard, fetchFilms } from 'entities/film';
 import './style.scss'
 
 export const Catalog = () => {
@@ -9,10 +9,6 @@ export const Catalog = () => {
     useEffect(()=>{
         fetchFilms(dispatch)
     },[])
-    useEffect(()=>{
-        console.log(error,'er');
-        
-    })
     return (
         <div className='catalog'>
             {films&& films.map((el)=>{

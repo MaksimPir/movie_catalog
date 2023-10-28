@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Input } from 'shared/ui/input/Input';
+import { Input } from 'shared/ui/input';
 import { IInputProps } from './types';
 
 export const InputWithRules:FC<IInputProps>=({onChange,rules,text,value, inputRef, ...others})=>{

@@ -14,8 +14,6 @@ export default  class FilmService
     }
     static async addComment(idFilm:number, idUser:number, text:string):Promise<AxiosResponse<ICommentResponse>>
     {
-        console.log('text',idFilm, idUser,text);
-        
         return axios.post<ICommentResponse>(`${API_URL}/film`,{idFilm, idUser,text})
     }
 }

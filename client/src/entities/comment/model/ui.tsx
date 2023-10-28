@@ -1,6 +1,6 @@
-import React, { FC, useEffect } from 'react';
+import { FC } from 'react';
 import './style.scss'
-import { ICommentProps } from '../types';
+import { ICommentProps } from './types';
 export const Comment:FC<ICommentProps> = ({comment}) => {
     return (
         <div className='comment'>

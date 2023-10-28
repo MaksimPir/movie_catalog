@@ -8,9 +8,9 @@ export const FilmCard:FC<ICardFilmProps> = ({film}) => {
     const navigate=useNavigate()
     return (
         <div className='cardfilm' 
-        onMouseEnter={()=>setIsFocus(true)}
-        onMouseLeave={()=>setIsFocus(false)}
-        onClick={()=>navigate(`/film/${film.id}`)}
+            onMouseEnter={()=>setIsFocus(true)}
+            onMouseLeave={()=>setIsFocus(false)}
+            onClick={()=>navigate(`/film/${film.id}`)}
         >
             <div className='cardfilm__image'>
                 <img src={film.image}/>
@@ -21,7 +21,6 @@ export const FilmCard:FC<ICardFilmProps> = ({film}) => {
                 </div>}
             </div>
             <h3 className='cardfilm__title'>{film.name}</h3>
-        
         </div>
     );
 };

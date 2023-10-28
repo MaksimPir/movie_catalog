@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC } from 'react';
 import { IMainSectionProps } from './types';
 import './style.scss'
 import { Rate } from 'antd';
@@ -8,7 +8,6 @@ export const MainSectionFilm:FC<IMainSectionProps> = ({film}) => {
             <div className='filmsection__container'>
                 <img className='filmsection__image' src={film.image}/>
             </div>
-          
             <div className='filmsection__infofilm'>
                 <div className='infofilm__title'>
                     <h1>
@@ -24,8 +23,6 @@ export const MainSectionFilm:FC<IMainSectionProps> = ({film}) => {
                 </div>
             </div>
         </div>
-        
-
     );
 };
 

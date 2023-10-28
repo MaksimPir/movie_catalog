@@ -5,10 +5,7 @@ export interface IInputProps extends Omit<
     "onChange" | "value"
     > 
 {
-    onChange: (value: string) => void
-    value:string,
-    rules:RegExp,
-    text:string,
+    value: string;
+    onChange: (value: string) => void;
     inputRef?:React.LegacyRef<HTMLInputElement>
-}
- 
+};

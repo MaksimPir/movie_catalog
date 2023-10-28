@@ -19,3 +19,9 @@
         @content;
     }
 }
+
+@mixin smallHeight {
+    @media only screen and (max-height: 450px) {
+        @content;
+    }
+}

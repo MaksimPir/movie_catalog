@@ -5,7 +5,7 @@ body {
     margin: 0;
     font-family: 'Eudoxus Sans', sans-serif;
     line-height: 180%;
-    height: 100vh;
+    height: 100%;
     @include text-regular;
     @include theme-regular;
 }
@@ -39,6 +39,10 @@ h1{
 }
 #root
 {
-    height: 100vh;
+    // height: 100vh;
     position: relative;
+}
+p
+{
+   @include text-info;
 }

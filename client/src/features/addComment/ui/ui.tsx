@@ -1,13 +1,12 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import  { FC, useRef, useState } from 'react';
 import './styles.scss'
 import { useAppDispatch, useAppSelector } from 'shared/lib';
 import { useParams } from 'react-router-dom';
-import { addComment, fetchCommentsById } from 'entities/comment/model/comments';
+import { addComment } from 'entities/comment';
 export const CommentInput:FC= () => {
-    const ref=useRef<HTMLSpanElement>(null)
+    const [comment, setComment]=useState('')
     const {idFilm}=useParams()
     const dispatch=useAppDispatch()
-    const [comment, setComment]=useState('')
     const {isAuth,user}=useAppSelector(state=>state.auth)
     const clickHandler=()=>{
         if(comment.trim()!='' && idFilm && !isNaN(Number(idFilm)))
@@ -23,13 +22,13 @@ export const CommentInput:FC= () => {
                 Пройдите авторизацию для добавления комментариев!
             </div>
         )
-       
     }
-    
     return (
         <div className='commentinput'>
-            {/* <span className="textarea" role="textbox" contentEditable ref={ref}></span> */}
-            <input className='commentinput__input' placeholder='Введите комментарий' value={comment} onChange={(e)=>setComment(e.target.value)}/>
+            <input className='commentinput__input' 
+                placeholder='Введите комментарий' 
+                value={comment} 
+                onChange={(e)=>setComment(e.target.value)}/>
             <button className='commentinput__btn' onClick={clickHandler}>Отправить</button>
         </div>
     );

@@ -1,1 +1,1 @@
-export * as LoginForm from './ui'
+export {LoginForm} from './ui'

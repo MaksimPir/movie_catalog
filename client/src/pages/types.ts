@@ -1,6 +1,5 @@
 import LoginPage from "../pages/LoginPage/LoginPage"
 import MainPage from "../pages/MainPage/MainPage"
-import UserPage from "../pages/UserPage/UserPage"
 import FilmPage from "./FilmPage/FilmPage"
 
 
@@ -30,10 +29,6 @@ export const publicRoutes:IRoute[]=[
 ]
 
 export const authRoutes:IRoute[]=[
-    {
-        path:routesEnum.USER,
-        component:UserPage
-    },
     {
         path:routesEnum.MAIN,
         component:MainPage

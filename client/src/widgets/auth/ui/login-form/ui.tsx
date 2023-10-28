@@ -1,12 +1,11 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { useAppDispatch } from "shared/lib";
-import { login, registration } from "entities/user/model";
-import { Input } from "shared/ui/input/Input";
-import {Button} from 'shared/ui/button/Button'
-import  './index.scss'
+import { login, registration } from "entities/user";
+import {Button} from 'shared/ui/button'
+import  './style.scss'
 import { InputWithRules } from "features/inputWithRules";
 
-const LoginForm:FC = () => {
+export const LoginForm:FC = () => {
     const [email, setEmail]=useState('')
     const [password, setPassword]=useState('')
     const myRef=useRef<HTMLInputElement>(null)
@@ -64,4 +63,3 @@ const LoginForm:FC = () => {
     );
 };
 
-export default LoginForm;

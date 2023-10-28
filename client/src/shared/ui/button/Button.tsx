@@ -1,11 +1,7 @@
-import React, { FC, PropsWithChildren } from 'react';
+import  { FC } from 'react';
 import './index.scss'
-interface IButtonProps extends PropsWithChildren
-{
-    text:string
-    nameOfClass:string
-    onClick:()=>void
-}
+import { IButtonProps } from './types';
+
 export const Button:FC<IButtonProps> = ({nameOfClass,onClick,text}) => {
     return (
         <button className={`button ${nameOfClass}`} onClick={onClick}>
