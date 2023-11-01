@@ -9,6 +9,8 @@ const $api=axios.create({
 })
 
 $api.interceptors.request.use((config)=>{
+    console.log(`Bearer ${localStorage.getItem('token')}`);
+    
     config.headers.Authorization=`Bearer ${localStorage.getItem('token')}`
     return config
 })

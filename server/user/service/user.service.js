@@ -1,8 +1,8 @@
-const bcrypt=require('bcrypt')
+const bcrypt=require('bcryptjs')
 const db=require('../../db')
 const ApiError=require('../../exceptions/api-error')
 const uuid=require('uuid')
-const tokenService=require('../service/token.service')
+const tokenService=require('./token.service')
 const UserDto=require('../dto/user.dto')
 class UserService{
     async isRegistered(email)
@@ -74,7 +74,7 @@ class UserService{
         const tokenFromDB=await tokenService.isExistTokenByToken(refreshToken)
         if(!tokenFromDB||!userData)
         {
-            throw ApiError.UnauthorizedError();
+            throw ApiError.UnauthorizedError(refreshToken);
         }
         const user=await this.getUserById(userData.id)
         const userDto=new UserDto(user)

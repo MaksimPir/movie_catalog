@@ -22,36 +22,47 @@ export const filmSlice=createSlice({
     },
     extraReducers:(builder)=>{
         builder.addCase(fetchFilms.fulfilled,(state,action)=>{
+            console.log('err2');
             if(action.payload)
             {
                 state.films=action.payload
                 state.error=false
             }
         }).addCase(fetchFilms.rejected,(state,action)=>{
-            state.error=false
+            state.error=true
         })
     }
 
 })
 export const reducer= filmSlice.reducer
-export const fetchFilms =createAsyncThunk('film/fetchFilms',async()=>{
+export const fetchFilms =createAsyncThunk('film/fetchFilms',async(_,{rejectWithValue})=>{
     try{
+        console.log( 'res');
         const response=await FilmService.getAll()
+        console.log(response, 'res');
+        
         return response.data
     }
     catch(e:any)
     {
-        console.log(e.response?.data?.message);
+        return rejectWithValue(e.message)
     }
 }) 
-export const fetchFilmById=createAsyncThunk('film/fetchFilmById',async(filmId:number)=>{
+export const fetchFilmById=createAsyncThunk('film/fetchFilmById',async(filmId:number,{rejectWithValue})=>{
     try{
         const response=await FilmService.getById(filmId)
         return response.data
     }
     catch(e:any)
     {
-        console.log(e.response?.data?.message);
+        if(e.response)
+        {
+           return rejectWithValue(e.response?.data?.message)
+        }
+        else 
+        {
+           return rejectWithValue(e.message)
+        }
     }
 })
 

@@ -28,8 +28,9 @@ export const fetchCommentsById =async(dispatch:AppDispatch, filmId:number)=>{
     }
     catch(e:any)
     {
-        dispatch(fetchingStop({isError:true,isFetching:false,isSuccess:false,answer:e.response.data.message}))
-        console.log(e.response?.data?.message);
+        console.log(e.message);
+        dispatch(fetchingStop({isError:true,isFetching:false,isSuccess:false,answer:e.message}))
+        
     }
 }
 

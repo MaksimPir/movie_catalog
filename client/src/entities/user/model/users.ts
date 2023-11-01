@@ -67,26 +67,26 @@ export const {auth,logout}=authSlice.actions
 export const reducer= authSlice.reducer
 
 
-export const login =createAsyncThunk('user/login',async(data:IAuthPayload)=>{
+export const login =createAsyncThunk('user/login',async(data:IAuthPayload,{rejectWithValue})=>{
     try{
         const response=await UserService.login(data.email,data.password)
         localStorage.setItem('token',response.data.accessToken)
         return response.data.user
     }
     catch(e:any)
-    {
+    {        
         if(e.response)
         {
-            console.log(e.response?.data?.message);
+           return rejectWithValue(e.response?.data?.message)
         }
         else 
         {
-            console.log(e);
+           return rejectWithValue(e.message)
         }
         
     }
 })   
-export const registration =createAsyncThunk('user/registration',async(data:IAuthPayload)=>{
+export const registration =createAsyncThunk('user/registration',async(data:IAuthPayload,{rejectWithValue})=>{
     try{
         const response=await UserService.registration(data.email,data.password)
         localStorage.setItem('token',response.data.accessToken)
@@ -96,22 +96,29 @@ export const registration =createAsyncThunk('user/registration',async(data:IAuth
     {
         if(e.response)
         {
-            console.log(e.response?.data?.message);
+           return rejectWithValue(e.response?.data?.message)
         }
         else 
         {
-            console.log(e);
+           return rejectWithValue(e.message)
         }
     }
 })
-export const logoutAction =createAsyncThunk('user/logout',async()=>{
+export const logoutAction =createAsyncThunk('user/logout',async(_,{rejectWithValue})=>{
     try{
         const response=await UserService.logout()
         localStorage.removeItem('token')
     }
     catch(e:any)
     {
-        console.log(e.response?.data?.message);
+        if(e.response)
+        {
+           return rejectWithValue(e.response?.data?.message)
+        }
+        else 
+        {
+           return rejectWithValue(e.message)
+        }
     }
 }) 
 export const checkAuth=createAsyncThunk('user/checkAuth',async()=>{
