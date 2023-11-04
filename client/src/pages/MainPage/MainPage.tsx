@@ -1,5 +1,5 @@
 import { withNotification } from 'app/providers/with-notification';
-import {  useAppSelector } from 'app/store/models';
+import { useAppSelector } from 'shared/lib';
 import { Catalog } from 'widgets/catalog';
 
 
