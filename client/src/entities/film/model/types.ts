@@ -2,10 +2,17 @@ import { IFilm } from "shared/api";
 
 export interface ICardFilmProps
 {
-    film:IFilm
+    film:IFilm,
+    ref?: (node?: Element | null | undefined) => void
 } 
 export interface IFilmInitialState
 {
     films:IFilm[],
-    error:boolean
+    error:boolean,
+    isEnd:boolean
+}
+export interface IFilmRangeParams
+{
+    start:number
+    count:number
 }

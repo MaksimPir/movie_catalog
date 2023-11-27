@@ -2,11 +2,12 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AppDispatch } from "shared/lib/types";
 import { IFilm } from "shared/api";
 import  FilmService  from "shared/api/typicode/films";
-import { IFilmInitialState } from './types';
+import { IFilmInitialState, IFilmRangeParams } from './types';
 
 const initialState:IFilmInitialState={
     films:[] as IFilm[],
-    error:false
+    error:false,
+    isEnd:false
 }
 export const filmSlice=createSlice({
     name:'films',
@@ -22,13 +23,26 @@ export const filmSlice=createSlice({
     },
     extraReducers:(builder)=>{
         builder.addCase(fetchFilms.fulfilled,(state,action)=>{
-            console.log('err2');
             if(action.payload)
             {
                 state.films=action.payload
                 state.error=false
             }
         }).addCase(fetchFilms.rejected,(state,action)=>{
+            state.error=true
+        })
+        builder.addCase(fetchRangeFilms.fulfilled,(state,action)=>{
+            if(action.payload)
+            {
+                state.films=[...state.films,...action.payload]
+                state.error=false
+                state.isEnd=false
+            }
+            else
+            {
+                state.isEnd=true
+            }
+        }).addCase(fetchRangeFilms.rejected,(state)=>{
             state.error=true
         })
     }
@@ -41,6 +55,19 @@ export const fetchFilms =createAsyncThunk('film/fetchFilms',async(_,{rejectWithV
         const response=await FilmService.getAll()
         console.log(response, 'res');
         
+        return response.data
+    }
+    catch(e:any)
+    {
+        return rejectWithValue(e.message)
+    }
+}) 
+export const fetchRangeFilms =createAsyncThunk('film/fetchRangeFilms',async(data:IFilmRangeParams,{rejectWithValue})=>{
+    try{
+        console.log( 'res');
+        
+        const response=await FilmService.getRange(data.start,data.count)
+        console.log(response, 'res');
         return response.data
     }
     catch(e:any)
