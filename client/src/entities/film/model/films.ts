@@ -1,8 +1,10 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {createApi,fetchBaseQuery} from '@reduxjs/toolkit/dist/query/react'
 import { AppDispatch } from "shared/lib/types";
 import { IFilm } from "shared/api";
 import  FilmService  from "shared/api/typicode/films";
-import { IFilmInitialState, IFilmRangeParams } from './types';
+import { IFilmInitialState, IFilmRangeParams, IFilmResponse } from './types';
+import { API_URL } from "shared/config";
 
 const initialState:IFilmInitialState={
     films:[] as IFilm[],
@@ -93,3 +95,25 @@ export const fetchFilmById=createAsyncThunk('film/fetchFilmById',async(filmId:nu
     }
 })
 
+export const filmApi=createApi({
+    reducerPath:'films',
+    baseQuery:fetchBaseQuery({baseUrl:API_URL}),
+    endpoints:(build)=>({
+        fetchAllFilms: build.query<IFilmResponse,{count:number,main:number, direction:number}>({
+            query:({count=5, main=0,direction=0})=>({
+                url:'/film',
+                params:
+                {
+                    count:count,
+                    main:main,
+                    direction
+                }
+            })
+        }),
+        // fetchPostById: build.query<IPost,number>({
+        //     query:(id:number=1)=>({
+        //         url:`/posts/${id}`,
+        //     })
+        // })
+    })
+})

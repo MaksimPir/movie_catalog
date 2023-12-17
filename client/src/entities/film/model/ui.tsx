@@ -9,7 +9,8 @@ import { ImageLazy } from 'shared/ui/image/Image';
 export const FilmCard:FC<ICardFilmProps> = ({film}) => {
     const {ref, inView}=useInView({
         threshold:1,
-        triggerOnce:true
+        triggerOnce:true,
+        rootMargin:'300px'
     })
     const [isFocus,setIsFocus]=useState(false)
     const navigate=useNavigate()
@@ -28,7 +29,7 @@ export const FilmCard:FC<ICardFilmProps> = ({film}) => {
                     <h4 className='cardfilm__rate'>Рейтинг {film.rate}</h4>
                 </div>}
             </div>
-            <h3 className='cardfilm__title'>{film.name}</h3>
+            <h3 className='cardfilm__title'>{film.name +film.id}</h3>
         </div>
     );
 };

@@ -16,3 +16,8 @@ export interface IFilmRangeParams
     start:number
     count:number
 }
+export interface IFilmResponse 
+{
+    films: IFilm[]
+    count: number
+}

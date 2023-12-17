@@ -4,15 +4,15 @@ class FilmController{
     {
         try
         {
-            const {start,count}=req.query
+            const {main,count, direction}=req.query
             console.log(req.query,'params');
             let films={}
-            if(isNaN(Number(start))&&isNaN(Number(count)))
+            if(isNaN(Number(main))&&isNaN(Number(count))&&isNaN(Number(direction)))
             {
                 films=await filmService.getFilms()
             }else
             {
-                films=await filmService.getRangeFilms(start,count)
+                films=await filmService.getRangeFilms(main,count,direction)
             }
             return res.json(films)
         }
