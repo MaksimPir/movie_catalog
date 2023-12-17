@@ -1,10 +1,9 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import './style.scss'
 import { ICardFilmProps } from './types';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
-import { Skeleton } from 'antd';
-import { ImageLazy } from 'shared/ui/image/Image';
+
 
 export const FilmCard:FC<ICardFilmProps> = ({film}) => {
     const {ref, inView}=useInView({
@@ -21,7 +20,7 @@ export const FilmCard:FC<ICardFilmProps> = ({film}) => {
             ref={ref}
         >
             <div className='cardfilm__image'>
-               <ImageLazy src={film.image} inView={inView} />
+            <img  src={film.image} alt={film.name}/>
                 {isFocus&& 
                 <div className='cardfilm__image__focus'>
                     <div className='cardfilm__desc'>{film.description}</div>
