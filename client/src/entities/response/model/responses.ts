@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { IInitialState, IResponsePayload } from "./types"
 import { AppDispatch } from "shared/lib/types"
-import { fetchFilmById, fetchFilms } from "entities/film"
+import { fetchFilmById, fetchFilms, fetchRangeFilms } from "entities/film"
 import { login, registration } from "entities/user"
 
 const initialState:IInitialState={
@@ -63,6 +63,22 @@ export const responseSlice=createSlice(
                 state.isSuccess=true
                 state.isFetching=false
             }).addCase(fetchFilms.rejected,(state,action)=>{
+                state.answer=action.payload+''||'Что-то пошло не так'
+                state.isError=true
+                state.isSuccess=false
+                state.isFetching=false
+            })
+            builder.addCase(fetchRangeFilms.pending,(state)=>{
+                state.answer=''
+                state.isError=false
+                state.isSuccess=false
+                state.isFetching=true
+            }).addCase(fetchRangeFilms.fulfilled,(state)=>{
+                state.answer='Фильмы получены'
+                state.isError=false
+                state.isSuccess=true
+                state.isFetching=false
+            }).addCase(fetchRangeFilms.rejected,(state,action)=>{
                 state.answer=action.payload+''||'Что-то пошло не так'
                 state.isError=true
                 state.isSuccess=false

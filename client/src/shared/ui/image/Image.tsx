@@ -4,9 +4,7 @@ import { IImageLazyProps } from './type';
 
 export const ImageLazy:FC<IImageLazyProps> = ({src, inView}) => {
     const [isLoadedImage, setIsLoadedImage]=useState(false)
-    useEffect(()=>{
-        console.log(src, isLoadedImage, inView);
-        
+    useEffect(()=>{        
         if(inView && !isLoadedImage)
         {
             const img=new Image()

@@ -4,20 +4,21 @@
     max-height: 500px;
     min-width: 300px;
     min-height: 200px;
+    height: 100%;
     border: 1px solid white;
     text-align: center;
     background-color: $dark-theme-third;
     padding: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     flex-direction: column;
     border-radius: 10px;
-    margin: 20px;
     transition: transform 0.6s;
     cursor: pointer;
 
     &__image{
         position: relative;
+        overflow: hidden;
         &__skeleton
         {
             width: 100%;

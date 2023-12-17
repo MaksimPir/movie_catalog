@@ -8,6 +8,10 @@ export default  class FilmService
     {
         return axios.get<IFilm[]>(`${API_URL}/film`)
     }
+    static async getRange(start:number,count:number):Promise<AxiosResponse<IFilm[]>>
+    {
+        return axios.get<IFilm[]>(`${API_URL}/film?start=${start}&count=${count}`)
+    }
     static async getById(id:number):Promise<AxiosResponse<IResponseFilmById>>
     {
         return axios.get<IResponseFilmById>(`${API_URL}/film/${id}`)
